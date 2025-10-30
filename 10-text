@@ -1,0 +1,67 @@
+Experiment No. 10 — Installation of Ansible on AWS Instance
+Aim:
+To install Ansible on top of AWS instance, configure SSH access between Ansible master/slave, set up Ansible host, and test the connection.
+________________________________________
+⚙️ Steps to Perform:
+STEP 1: Connect AWS Instances
+•	Launch two AWS EC2 instances (Ubuntu-based) — one as Ansible Master and another as Ansible Slave.
+________________________________________
+STEP 2: Connect to Instances
+•	Open terminal or AWS console.
+•	Connect to Ansible Master:
+•	ssh -i key.pem ubuntu@<master-public-ip>
+•	Connect to Ansible Slave:
+•	ssh -i key.pem ubuntu@<slave-public-ip>
+________________________________________
+STEP 3: Test Network Connection
+•	From Master → Slave:
+•	ping <slave-private-ip>
+•	From Slave → Master:
+•	ping <master-private-ip>
+________________________________________
+STEP 4: Install Ansible
+On Ansible Master:
+sudo apt update -y
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt update -y
+sudo apt-get install ansible -y
+ansible --version
+On Ansible Slave:
+sudo apt update -y
+________________________________________
+STEP 5: Configure Inventory (Hosts)
+•	Edit Ansible hosts file:
+•	sudo nano /etc/ansible/hosts
+•	Add slave’s IP address:
+•	[clients]
+•	client_1 ansible_host=<slave-private-ip> ansible_user=ubuntu
+•	Save and exit.
+________________________________________
+STEP 6: Setup SSH Key Authentication
+On Master:
+ssh-keygen -t rsa
+cd ~/.ssh
+cat id_rsa.pub
+Copy this key.
+On Slave:
+cd ~/.ssh
+nano authorized_keys
+# Paste the master's public key here
+sudo nano /etc/ssh/sshd_config
+# Ensure PubkeyAuthentication is yes
+Save and restart SSH if needed.
+________________________________________
+STEP 7: Test Ansible Connection
+On Master:
+ansible -m ping all
+ansible client_1 -m setup
+________________________________________
+STEP 8: Install and Remove Packages Remotely
+Install a package (e.g., git):
+ansible client_1 -m apt -a "name=git state=present" --become
+Uninstall a package (e.g., nano):
+ansible client_1 -m apt -a "name=nano state=absent" --become
+Reinstall package (if needed):
+ansible client_1 -m apt -a "name=nano state=present" --become
+________________________________________
+
