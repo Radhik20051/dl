@@ -1,0 +1,44 @@
+Experiment No. 11: To deploy a web application by provisioning LAMP Stack using ansible 
+playbook. 
+STEP1: Clone ansible code from my github repository Ansible-master:  
+root@ip-172-31-18-177:~/.ssh# cd ~ 
+root@ip-172-31-18-177:~# ls 
+snap 
+root@ip-172-31-18-177:~# mkdir ansible-lab 
+root@ip-172-31-18-177:~# cd ansible-lab/ 
+root@ip-172-31-18-177:~/ansible-lab# git clone 
+https://github.com/sujataoak799/ansiblecodes.git 
+Cloning into 'ansible-codes'... 
+Compiled By: Prof. Sujata Oak 
+remote: Enumerating objects: 23, done. 
+remote: Counting objects: 100% (6/6), done. 
+remote: Compressing objects: 100% (5/5), done. 
+remote: Total 23 (delta 1), reused 4 (delta 1), pack-reused 17 (from 1) 
+Receiving objects: 100% (23/23), 8.63 KiB | 1.73 MiB/s, done. 
+Resolving deltas: 100% (6/6), done. 
+root@ip-172-31-18-177:~/ansible-lab# ls 
+ansible-codes 
+root@ip-172-31-18-177:~/ansible-lab# cd ansible-codes/ 
+root@ip-172-31-18-177:~/ansible-lab/ansible-codes# ls 
+config.php 
+lampstack_1.yml 
+mysqlmodule.yml 
+reset-password.php 
+deploywebsite.yml 
+login.php 
+readme.txt 
+users.sql 
+index.html 
+logout.php 
+register.php 
+welcome.php 
+STEP 2: Configure Ansible-Slave Machine to Host the Application 
+root@ip-172-31-18-177:~/ansible-lab/ansible-codes# nano lampstack_1.yml 
+STEP3: How to Run/Execute a playbook. 
+root@ip-172-31-18-177:~/ansible-lab/ansible-codes# ansible-playbook lampstack_1.yml 
+Ansible-slave:  
+root@ip-172-31-16-10:~# mysql 
+root@ip-172-31-16-10:~# php –version 
+root@ip-172-31-16-10:~# service apache2 status 
+Once apache service status is active. Copy IPv4 address of ansible-slave machine in browser 
+and you can see the deployment of index.html page. 
