@@ -1,0 +1,26 @@
+Experiment No. 4: To install Jenkins and configure parallel jobs for building pipeline 
+Steps: 
+1) Create 3 Jobs: Testing, Staging and Production 
+2) Add build step for each and choose “Execute Shell” option 
+a. For Testing: 
+sleep 10 
+echo “This is testing phase” 
+b. For Staging: 
+sleep 10 
+echo “This is staging phase” 
+c. For Production: 
+sleep 10 
+echo “This is production phase” 
+3) Go to “Testing” > Configure > Add post build action > build other project and select 
+“Staging”. Do the same for “Staging” but here use “build other project (manual step)” 
+and select “Production” 
+4) Go to Dashboard and create a new “Build Pipeline View”. Select “Testing” as the 
+“Select Initial Job” 
+5) Run and keep refreshing till the pipeline is executed. Manually run the Production 
+project. 
+6) In the Staging project, change the post build action from “build other project (manual 
+step)” to “build other project”. 
+7) Select “Production” in projects to build and re run the pipeline. (This is time manual 
+intervention is not needed for production) 
+8) For Parallel Jobs, create a new job and add it to the post build action of Testing. 
+9) Run the pipeline again and keep reloading. 
